@@ -44,7 +44,7 @@ async def get_invoices(
         lines_results = await session.execute(lines_query)
         lines = lines_results.all()
         subtotal = sum(line["subtotal_line"] for line in lines)
-        total = subtotal - invoice_discount
+        total = subtotal - (subtotal * invoice_discount)
         # Фильтрация по сумме
         if total_sum_gte is not None and total < total_sum_gte:
             continue
