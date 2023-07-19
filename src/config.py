@@ -9,4 +9,4 @@ class Settings(BaseSettings):
     DB_PORT: int
 
     class Config:
-        env_file = ".env.example"
+        env_file = ".env"
