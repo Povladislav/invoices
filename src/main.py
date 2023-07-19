@@ -1,7 +1,10 @@
+from typing import List
+
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database.database import get_async_session
+from schemas import InvoiceOutSchema
 from src.dependencies import PaginationParams
 from src.repository import InvoiceRepository
 from src.service import InvoiceService
@@ -9,10 +12,10 @@ from src.service import InvoiceService
 app = FastAPI()
 
 
-@app.get("/invoices/", response_model=list[dict])
+@app.get("/invoices/", response_model=List[InvoiceOutSchema])
 async def get_invoices(
-    pagination: PaginationParams = Depends(),
-    session: AsyncSession = Depends(get_async_session),
+        pagination: PaginationParams = Depends(),
+        session: AsyncSession = Depends(get_async_session),
 ):
     invoice_repository = InvoiceRepository(session)
     invoice_service = InvoiceService(invoice_repository)

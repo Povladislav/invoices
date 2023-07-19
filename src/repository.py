@@ -2,6 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from models.invoice import Invoice
+from schemas import InvoiceOutSchema
 
 
 class InvoiceRepository:
@@ -17,4 +18,6 @@ class InvoiceRepository:
             # Get all fetched invoices
             invoices = invoices_results.all()
 
-        return invoices[skip : skip + limit]
+        # Convert the list of tuples to a list of InvoiceOutSchema objects
+        return [InvoiceOutSchema(id=invoice.id, title=invoice.title, discount=invoice.discount) for invoice in invoices]
+
