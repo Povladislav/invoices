@@ -7,7 +7,7 @@ from database.database import Base
 from models.base import BaseModel
 
 
-class Invoice(Base, BaseModel):
+class Invoice(BaseModel):
     __tablename__ = "invoices"
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(nullable=False)

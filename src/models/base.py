@@ -14,3 +14,7 @@ class BaseModel(Base):
     updated_at: Mapped[DateTime] = mapped_column(
         DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
     )
+    __mapper_args__ = {
+        "polymorphic_identity": "base_model",
+        "concrete": True
+    }
